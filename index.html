@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'Auberge de Mimard-le-Vieux</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Alegreya+SC&family=MedievalSharp&family=IM+Fell+English&family=UnifrakturMaguntia&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #f1e8d0;
+      --ink: #3e2b1c;
+      --gold: #d4af37;
+      --silver: #c0c0c0;
+      --bronze: #cd7f32;
+      --blood: #8a0303;
+      --dark-bg: #0a0806;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes glow {
+      0% { 
+        box-shadow: 0 0 15px gold, 0 0 30px rgba(212, 175, 55, 0.3);
+        filter: brightness(1.1);
+      }
+      100% { 
+        box-shadow: 0 0 30px gold, 0 0 60px rgba(212, 175, 55, 0.5);
+        filter: brightness(1.2);
+      }
+    }
+
+    @keyframes sparkle {
+      0% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0.3; transform: scale(0.8); }
+    }
+
+    body {
+      background: 
+        radial-gradient(circle at center, rgba(58, 45, 33, 0.8) 0%, var(--dark-bg) 100%),
+        url('https://www.transparenttextures.com/patterns/black-paper.png');
+      font-family: "MedievalSharp", cursive;
+      color: var(--ink);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      animation: fadeIn 1.5s ease-out;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .content-wrapper {
+      background: url('https://www.transparenttextures.com/patterns/old-paper.png');
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+      margin: 0 auto;
+      max-width: 1400px;
+      position: relative;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: 
+        linear-gradient(rgba(10, 8, 6, 0.7), rgba(10, 8, 6, 0.7)),
+        url('header.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #f8f3e6;
+      border-bottom: 12px ridge var(--gold);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 50%, rgba(212, 175, 55, 0.1) 100%);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 4rem;
+      text-shadow: 3px 3px 5px #000, 0 0 15px var(--gold);
+      font-family: "Cinzel Decorative", serif;
+      letter-spacing: 1px;
+      position: relative;
+      color: #f8e6b0;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, #f8e6b0, #d4af37, #f8e6b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.8));
+      animation: float 6s ease-in-out infinite;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 1.5rem;
+      text-shadow: 2px 2px 3px #000, 0 0 5px var(--blood);
+      position: relative;
+      font-style: italic;
+      margin-top: 10px;
+      font-family: "Alegreya SC", serif;
+      color: #f1e8d0;
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      margin: 40px auto 20px;
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--gold);
+      display: inline-block;
+      padding: 5px 40px;
+      position: relative;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+      background: url('https://www.transparenttextures.com/patterns/old-paper.png');
+      border: 3px double var(--gold);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      transform: rotate(-2deg);
+      font-family: "IM Fell English SC", serif;
+      letter-spacing: 1px;
+    }
+
+    h2::before, h2::after {
+      content: "✧";
+      position: absolute;
+      color: var(--gold);
+      font-size: 1.5rem;
+    }
+
+    h2::before {
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    h2::after {
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .section-title-container {
+      text-align: center;
+      margin: 50px 0 30px;
+      position: relative;
+    }
+
+    .section-title-container::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      z-index: -1;
+    }
+
+    .container {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 25px;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    .card-slot {
+      width: 100%;
+      padding-top: 140%;
+      position: relative;
+      background-size: cover;
+      border-radius: 5px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    .card-slot::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      pointer-events: none;
+    }
+
+    .card-slot img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+      backface-visibility: hidden;
+    }
+
+    .common { 
+      border: 6px solid #5c3b1e;
+      background: url('https://www.transparenttextures.com/patterns/cardboard.png'), #e6d3b3;
+    }
+
+    .rare { 
+      border: 6px solid #27496d;
+      background: url('https://www.transparenttextures.com/patterns/diagmonds.png'), #b3c6e6;
+      box-shadow: 0 0 15px rgba(39, 73, 109, 0.5);
+    }
+
+    .legendary { 
+      border: 6px solid var(--gold);
+      background: url('https://www.transparenttextures.com/patterns/gold-scale.png'), #f7d46d;
+      box-shadow: 0 0 25px gold;
+      animation: glow 3s infinite alternate;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .legendary::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0) 40%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 60%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 5s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(30deg); }
+      20% { transform: translateX(100%) rotate(30deg); }
+      100% { transform: translateX(100%) rotate(30deg); }
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    .lightbox-content {
+      background: url('https://www.transparenttextures.com/patterns/parchment.png'), #fef5df;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      gap: 30px;
+      box-shadow: 0 0 30px #000;
+      border: 15px solid transparent;
+      border-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png') 30 round;
+      position: relative;
+    }
+
+    .lightbox-content::before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border: 2px solid var(--gold);
+      pointer-events: none;
+    }
+
+    .lightbox-content img {
+      max-width: 350px;
+      height: auto;
+      border: 8px solid #3e2b1c;
+      border-radius: 5px;
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .lightbox-text {
+      font-size: 1.3rem;
+      color: #3e2b1c;
+      font-family: "IM Fell English SC", serif;
+      line-height: 1.6;
+    }
+
+    .lightbox-text h3 {
+      margin-top: 0;
+      font-size: 2rem;
+      color: #4a321f;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 10px;
+      font-family: "MedievalSharp", cursive;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      letter-spacing: 1px;
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(to bottom, rgba(10, 8, 6, 0.9), rgba(5, 4, 3, 0.95));
+      color: var(--parchment);
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 50px;
+      border-top: 8px ridge var(--gold);
+      font-family: "IM Fell English SC", serif;
+      position: relative;
+      box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      box-shadow: 0 0 10px var(--gold);
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Particules dorées fixes */
+    .gold-particle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: rgba(212, 175, 55, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+      box-shadow: 0 0 10px gold;
+      animation: sparkle 3s infinite ease-in-out;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      header p {
+        font-size: 1.2rem;
+      }
+      
+      .lightbox-content {
+        flex-direction: column;
+        padding: 20px;
+      }
+      
+      .lightbox-content img {
+        max-width: 100%;
+      }
+
+      .container {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particules dorées fixes -->
+  <div class="gold-particle" style="top: 15%; left: 10%; animation-delay: 0s;"></div>
+  <div class="gold-particle" style="top: 25%; left: 85%; animation-delay: 0.5s;"></div>
+  <div class="gold-particle" style="top: 40%; left: 15%; animation-delay: 1s;"></div>
+  <div class="gold-particle" style="top: 60%; left: 75%; animation-delay: 1.5s;"></div>
+  <div class="gold-particle" style="top: 75%; left: 20%; animation-delay: 2s;"></div>
+  <div class="gold-particle" style="top: 85%; left: 65%; animation-delay: 2.5s;"></div>
+
+  <div class="content-wrapper">
+    <header>
+      <h1>L'Auberge de Mimard-le-Vieux</h1>
+      <p>Recueil des âmes valeureuses du royaume d'Étienne Mimard</p>
+    </header>
+
+    <div class="section-title-container">
+      <h2>Commun</h2>
+    </div>
+    <div class="container">
+      <div class="card-slot common">
+        <img src="Matisse_C.PNG" alt="Sir Matistral le Tranchant" onclick="openLightbox(this, 'Sir Matistral le Tranchant','Chevalier vaillant... du moins, quand il est là. Connu dans tout le royaume pour son armure brillante, sa lame tranchante et… ses intestins capricieux. Disparaît systématiquement au milieu des batailles (et des cours) pour aller affronter une terrible bête dans les latrines du château. Certains disent qu&rsquo;il a fondé une forteresse dans les chiottes du donjon.')">
+      </div>
+      <div class="card-slot common">
+        <img src="Evan_C.PNG" alt="Evano la Frousse" onclick="openLightbox(this, 'Evano la Frousse', 'Gnome de profession, idiot par passion. Evano est bête. Vraiment. Il s&rsquo;est déjà enfui d&rsquo;un combat contre un miroir, a tenté d&rsquo;apprivoiser une torche, et a voulu draguer une elfe… qui était une statue. On l&rsquo;aime bien, mais personne ne sait pourquoi. Peut-être parce qu&rsquo;il fait les meilleurs bruits de panique du royaume.')">
+      </div>
+      <div class="card-slot common">
+        <img src="Emma_C.png" alt="Dame Emmélune la Gratte-Cordes" onclick="openLightbox(this, 'Dame Emmélune la Gratte-Cordes', 'Harpiste aussi belle que redoutable, elle fait fondre les cœurs comme du beurre elfique. Tous les aventuriers veulent la gérer, mais aucun ne passe la première note.')">
+      </div>
+      <div class="card-slot common">
+        <img src="Johan_C.png" alt="Jo le Grimoireux" onclick="openLightbox(this, 'Jo le Grimoireux', 'Mage vêtu de bleu, toujours aimable et serviable. Il connaît mille sorts et les utilise surtout pour aider ses potes à faire leurs devoirs magiques.')">
+      </div>
+      <div class="card-slot common">
+        <img src="Mathieu_C.png" alt="Frère Matéus la Fiole Vide" onclick="openLightbox(this, 'Frère Matéus la Fiole Vide', 'Moine complètement fou, capable de demander au professeur s&rsquo;il est autiste… en plein silence. Probablement possédé, ou juste très honnête.')">
+      </div>
+      <div class="card-slot common">
+        <img src="Thomas_C.png" alt="Tomaïe la Chope Sans Fond" onclick="openLightbox(this, 'Tomaïe la Chope Sans Fond', 'Tavernier dodu, bourré 90% du temps. On ne sait pas s&rsquo;il sert de la bière ou s&rsquo;il boit tous les stocks en cachette. Très chaleureux, surtout quand il titube.')">
+      </div>
+    </div>
+
+    <div class="section-title-container">
+      <h2>Rare</h2>
+    </div>
+    <div class="container">
+      <div class="card-slot rare">
+        <img src="images/rares/rare1.jpg" alt="Léo le Stratège" onclick="openLightbox(this, 'Léo le Stratège', 'Conquérant des DM, toujours prêt pour un duel de calculs.')">
+      </div>
+    </div>
+
+    <div class="section-title-container">
+      <h2>Légendaire</h2>
+    </div>
+    <div class="container">
+      <div class="card-slot legendary">
+        <img src="Louis_L.png" alt="Louichka des Écumes" onclick="openLightbox(this, 'Louichka des Écumes', 'La poiscaille légendaire de la PT. Sirène à lunettes, à la beauté abyssale et à l&rsquo;intelligence tranchante. Très respecté, on l&rsquo;appelle simplement : le Poisson.')">
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2023 L'Auberge de Mimard-le-Vieux - Tous droits réservés</p>
+    </footer>
+  </div>
+
+  <div class="lightbox" onclick="closeLightbox()">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <img id="lightbox-img" src="" alt="Zoom carte">
+      <div class="lightbox-text">
+        <h3 id="lightbox-name"></h3>
+        <p id="lightbox-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Effet d'orientation des cartes amélioré
+    function setupCardTilt() {
+      const cards = document.querySelectorAll('.card-slot');
+      
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          
+          // Calcul plus sensible pour un meilleur suivi
+          const tiltX = (y / rect.height * 15).toFixed(2);
+          const tiltY = -(x / rect.width * 15).toFixed(2);
+          
+          card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-10px)`;
+          card.style.boxShadow = `${-tiltY}px ${tiltX}px 30px rgba(0, 0, 0, 0.8)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+          card.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.6)';
+        });
+      });
+    }
+
+    // Lightbox functions
+    function openLightbox(img, name, desc) {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-name').textContent = name;
+      document.getElementById('lightbox-desc').innerHTML = desc;
+      document.querySelector('.lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.querySelector('.lightbox').style.display = 'none';
+    }
+
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', function() {
+      setupCardTilt();
+    });
+  </script>
+</body>
+</html>
