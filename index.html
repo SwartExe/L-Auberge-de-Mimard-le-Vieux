@@ -15,6 +15,7 @@
       --bronze: #cd7f32;
       --blood: #8a0303;
       --dark-bg: #0a0806;
+      --mythic: #6a0dad;
     }
 
     @media (max-width: 768px) {
@@ -356,11 +357,149 @@
       transform: rotate(30deg);
       animation: shine 3s infinite;
       z-index: 2;
-}
+    }
 
     @keyframes shine {
       0% { transform: translateX(-100%) rotate(30deg); }
       100% { transform: translateX(100%) rotate(30deg); }
+    }
+
+
+    .mythic { 
+      border: 8px solid var(--mythic);
+      background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png'), #e6d3ff;
+      box-shadow: 0 0 30px var(--mythic);
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      animation: mythic-glow 3s infinite alternate, float 5s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes mythic-glow {
+      0% {
+        box-shadow: 0 0 20px var(--mythic);
+        filter: brightness(1);
+      }
+      50% {
+        box-shadow: 0 0 40px var(--mythic), 0 0 60px rgba(106, 13, 173, 0.6);
+        filter: brightness(1.1);
+      }
+      100% {
+        box-shadow: 0 0 30px var(--mythic), 0 0 50px rgba(106, 13, 173, 0.8);
+        filter: brightness(1.05);
+      }
+    }
+
+    .mythic::before {
+      content: "";
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+      background: linear-gradient(
+        45deg,
+        rgba(106, 13, 173, 0) 0%,
+        rgba(106, 13, 173, 0.3) 50%,
+        rgba(106, 13, 173, 0) 100%
+      );
+      transform: rotate(45deg);
+      animation: mythic-shine 5s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes mythic-shine {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
+    }
+
+    .mythic::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(106, 13, 173, 0.2) 50%,
+        rgba(0, 0, 0, 0.5) 100%
+      );
+      z-index: -1;
+    }
+
+    .mythic-particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: rgba(200, 160, 255, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      box-shadow: 0 0 15px #fff, 0 0 10px var(--mythic);
+      animation: mythic-sparkle 4s infinite ease-in-out;
+    }
+
+    @keyframes mythic-sparkle {
+      0% { transform: scale(0.8); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.8); opacity: 0.5; }
+    }
+
+    .submit-button {
+      font-family: 'Cinzel Decorative', serif;
+      background: linear-gradient(to bottom, var(--gold), #b8860b);
+      color: var(--ink);
+      padding: 15px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+      border: 2px solid var(--gold);
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      margin: 30px 0;
+    }
+
+    .submit-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.4);
+      background: linear-gradient(to bottom, #ffd700, #daa520);
+    }
+
+    .submit-button:active {
+      transform: translateY(1px);
+    }
+
+    .submit-button::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .submit-button:hover::before {
+      opacity: 0.6;
+    }
+
+    .submit-button::after {
+      content: "✧";
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(0,0,0,0.2);
     }
 
     .lightbox {
@@ -565,6 +704,26 @@
         <img src="Louis_L.PNG" alt="Louichka des Écumes">
       </div>      
     </div>
+
+    <div class="section-title-container">
+      <h2>Mythique</h2>
+    </div>
+    <div class="container">
+      <div class="card-slot mythic" onclick="openLightbox(this.querySelector('img'), 'Étienne Mimard-le-Vieux', 'Le légendaire maître de l&rsquo;auberge, sage et mystérieux. Son regard perce les âmes et son savoir est aussi vaste que les étoiles. Seul lui connaît les véritables secrets des cartes...')">
+        <img src="Mimard_M.png" alt="Étienne Mimard-le-Vieux">
+        <!-- Particules mythiques -->
+        <div class="mythic-particle" style="top: 20%; left: 15%; animation-delay: 0s;"></div>
+        <div class="mythic-particle" style="top: 70%; left: 80%; animation-delay: 1s;"></div>
+        <div class="mythic-particle" style="top: 40%; left: 50%; animation-delay: 2s;"></div>
+        <div class="mythic-particle" style="top: 85%; left: 30%; animation-delay: 1.5s;"></div>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSesMWah5R2-YxIBFXffJj2DciYg0Nhsx7nNGl2WY3cK01dkIg/viewform?usp=dialog" target="_blank" class="submit-button">
+        ✨ Soumettre mon portrait médiéval ✨
+      </a>
+    </div>    
 
     <footer>
       <p>© 2025 L'Auberge de Mimard-le-Vieux - Promo 2024-2025</p>
