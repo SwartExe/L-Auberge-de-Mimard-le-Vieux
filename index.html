@@ -31,7 +31,6 @@
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
         background-color: #fef5df;
         background-image: none;
-        margin: 0 auto; /* Ajout pour centrer correctement */
       }
 
       .lightbox-content::before {
@@ -56,25 +55,6 @@
         font-size: 1.3rem;
         margin-bottom: 0.5rem;
         text-align: center;
-      }
-
-      /* Correction des marges sur mobile */
-      body, .content-wrapper {
-        padding-left: 0;
-        padding-right: 0;
-        margin-left: 0;
-        margin-right: 0;
-        overflow-x: hidden;
-      }
-
-      .container {
-        padding: 10px; /* Réduction du padding pour plus d'espace */
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 15px;
-      }
-
-      header {
-        padding: 30px 15px; /* Ajustement du padding */
       }
     }
 
@@ -138,7 +118,6 @@
       margin: 0 auto;
       max-width: 1400px;
       position: relative;
-      overflow-x: hidden; /* Empêche le débordement horizontal */
     }
 
     header {
@@ -253,7 +232,7 @@
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 25px;
       max-width: 1300px;
-      margin: 0 auto; /* Centrage amélioré */
+      margin: auto;
     }
 
     .card-slot {
@@ -311,6 +290,7 @@
       position: relative;
       animation: pulse 3s infinite ease-in-out, blue-glow 4s infinite ease-in-out;
     }
+
 
     .rare::before {
       content: "";
@@ -384,7 +364,7 @@
       100% { transform: translateX(100%) rotate(30deg); }
     }
 
-    /* Nouvelle classe Mythique */
+
     .mythic { 
       border: 8px solid var(--mythic);
       background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png'), #e6d3ff;
@@ -450,7 +430,6 @@
       z-index: -1;
     }
 
-    /* Effets de particules pour mythique */
     .mythic-particle {
       position: absolute;
       width: 8px;
@@ -468,6 +447,61 @@
       100% { transform: scale(0.8); opacity: 0.5; }
     }
 
+    .submit-button {
+      font-family: 'Cinzel Decorative', serif;
+      background: linear-gradient(to bottom, var(--gold), #b8860b);
+      color: var(--ink);
+      padding: 15px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+      border: 2px solid var(--gold);
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      margin: 30px 0;
+    }
+
+    .submit-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.4);
+      background: linear-gradient(to bottom, #ffd700, #daa520);
+    }
+
+    .submit-button:active {
+      transform: translateY(1px);
+    }
+
+    .submit-button::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .submit-button:hover::before {
+      opacity: 0.6;
+    }
+
+    .submit-button::after {
+      content: "✧";
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(0,0,0,0.2);
+    }
+
     .lightbox {
       position: fixed;
       top: 0;
@@ -479,7 +513,7 @@
       justify-content: center;
       align-items: center;
       z-index: 1000;
-      padding: 20px; /* Ajustement pour mobile */
+      padding: 40px;
       box-sizing: border-box;
     }
 
@@ -495,7 +529,6 @@
       border: 15px solid transparent;
       border-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png') 30 round;
       position: relative;
-      margin: 0 auto; /* Centrage amélioré */
     }
 
     .lightbox-content::before {
@@ -579,62 +612,6 @@
       animation: sparkle 3s infinite ease-in-out;
     }
 
-    /* Style amélioré pour le bouton de formulaire */
-    .submit-button {
-      font-family: 'Cinzel Decorative', serif;
-      background: linear-gradient(to bottom, var(--gold), #b8860b);
-      color: var(--ink);
-      padding: 15px 30px;
-      border-radius: 8px;
-      text-decoration: none;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.3);
-      transition: all 0.3s ease;
-      border: 2px solid var(--gold);
-      font-size: 1.2rem;
-      letter-spacing: 1px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-      position: relative;
-      overflow: hidden;
-      display: inline-block;
-      margin: 30px 0;
-    }
-
-    .submit-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.4);
-      background: linear-gradient(to bottom, #ffd700, #daa520);
-    }
-
-    .submit-button:active {
-      transform: translateY(1px);
-    }
-
-    .submit-button::before {
-      content: "";
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      border: 2px solid var(--gold);
-      border-radius: 12px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .submit-button:hover::before {
-      opacity: 0.6;
-    }
-
-    .submit-button::after {
-      content: "✧";
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: rgba(0,0,0,0.2);
-    }
-
     /* Responsive */
     @media (max-width: 768px) {
       h1 {
@@ -657,7 +634,6 @@
       .container {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 15px;
-        padding: 10px; /* Ajustement du padding */
       }
 
       .rare::before {
@@ -665,18 +641,6 @@
         left: -5px;
         right: -5px;
         bottom: -5px;
-      }
-
-      /* Correction des marges latérales */
-      body {
-        padding-left: 0;
-        padding-right: 0;
-      }
-
-      .content-wrapper {
-        margin-left: 0;
-        margin-right: 0;
-        max-width: 100%;
       }
     }
   </style>
@@ -811,10 +775,12 @@
       document.body.classList.add('noscroll'); // 👉 empêche le scroll
     }
 
+
     function closeLightbox() {
       document.querySelector('.lightbox').style.display = 'none';
       document.body.classList.remove('noscroll'); // 👉 réactive le scroll
     }
+
 
     // Initialize everything
     document.addEventListener('DOMContentLoaded', function() {
