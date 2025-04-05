@@ -16,6 +16,7 @@
       --blood: #8a0303;
       --dark-bg: #0a0806;
       --mythic: #6a0dad;
+      --submit: #2e8b57;
     }
 
     @media (max-width: 768px) {
@@ -430,6 +431,38 @@
       z-index: -1;
     }
 
+        .submit-card {
+      border: 6px solid var(--submit);
+      background: url('https://www.transparenttextures.com/patterns/cardboard.png'), #e6f3d3;
+      position: relative;
+      animation: pulse 2s infinite ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .submit-card:hover {
+      animation: pulse 1s infinite ease-in-out, glow-submit 2s infinite alternate;
+    }
+
+    .submit-plus {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 5rem;
+      color: var(--submit);
+      font-family: "Cinzel Decorative", serif;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      pointer-events: none;
+    }
+
+    @keyframes glow-submit {
+      0% { box-shadow: 0 0 15px var(--submit); }
+      100% { box-shadow: 0 0 30px var(--submit); }
+    }
+
     .mythic-particle {
       position: absolute;
       width: 8px;
@@ -445,61 +478,6 @@
       0% { transform: scale(0.8); opacity: 0.5; }
       50% { transform: scale(1.2); opacity: 1; }
       100% { transform: scale(0.8); opacity: 0.5; }
-    }
-
-    .submit-button {
-      font-family: 'Cinzel Decorative', serif;
-      background: linear-gradient(to bottom, var(--gold), #b8860b);
-      color: var(--ink);
-      padding: 15px 30px;
-      border-radius: 8px;
-      text-decoration: none;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.3);
-      transition: all 0.3s ease;
-      border: 2px solid var(--gold);
-      font-size: 1.2rem;
-      letter-spacing: 1px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-      position: relative;
-      overflow: hidden;
-      display: inline-block;
-      margin: 30px 0;
-    }
-
-    .submit-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.4);
-      background: linear-gradient(to bottom, #ffd700, #daa520);
-    }
-
-    .submit-button:active {
-      transform: translateY(1px);
-    }
-
-    .submit-button::before {
-      content: "";
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      border: 2px solid var(--gold);
-      border-radius: 12px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .submit-button:hover::before {
-      opacity: 0.6;
-    }
-
-    .submit-button::after {
-      content: "✧";
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: rgba(0,0,0,0.2);
     }
 
     .lightbox {
@@ -719,11 +697,14 @@
       </div>
     </div>
 
-    <div style="text-align:center;">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSesMWah5R2-YxIBFXffJj2DciYg0Nhsx7nNGl2WY3cK01dkIg/viewform?usp=dialog" target="_blank" class="submit-button">
-        Soumettre mon portrait médiéval
-      </a>
-    </div>    
+    <div class="section-title-container">
+      <h2>Soumets ta carte</h2>
+    </div>
+    <div class="container">
+      <div class="card-slot submit-card" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSesMWah5R2-YxIBFXffJj2DciYg0Nhsx7nNGl2WY3cK01dkIg/viewform?usp=dialog', '_blank')">
+        <div class="submit-plus">+</div>
+      </div>      
+    </div>
 
     <footer>
       <p>© 2025 L'Auberge de Mimard-le-Vieux - Promo 2024-2025</p>
