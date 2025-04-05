@@ -86,6 +86,12 @@
       100% { opacity: 0.3; transform: scale(0.8); }
     }
 
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
     body {
       background: 
         radial-gradient(circle at center, rgba(58, 45, 33, 0.8) 0%, var(--dark-bg) 100%),
@@ -265,19 +271,66 @@
       background: url('https://www.transparenttextures.com/patterns/cardboard.png'), #e6d3b3;
     }
 
-    .rare { 
+    @keyframes blue-glow {
+      0%   { box-shadow: 0 0 8px rgba(100, 149, 237, 0.3); }
+      50%  { box-shadow: 0 0 20px rgba(100, 149, 237, 0.7); }
+      100% { box-shadow: 0 0 8px rgba(100, 149, 237, 0.3); }
+    }
+
+    .rare {
       border: 6px solid #27496d;
       background: url('https://www.transparenttextures.com/patterns/diagmonds.png'), #b3c6e6;
       box-shadow: 0 0 15px rgba(39, 73, 109, 0.5);
+      position: relative;
+      animation: pulse 3s infinite ease-in-out, blue-glow 4s infinite ease-in-out;
+    }
+
+
+    .rare::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 2px solid rgba(39, 73, 109, 0.5);
+      border-radius: 8px;
+      animation: borderPulse 4s infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes borderPulse {
+      0% { border-color: rgba(39, 73, 109, 0.5); }
+      50% { border-color: rgba(100, 149, 237, 0.8); }
+      100% { border-color: rgba(39, 73, 109, 0.5); }
     }
 
     .legendary { 
       border: 6px solid var(--gold);
       background: url('https://www.transparenttextures.com/patterns/gold-scale.png'), #f7d46d;
       box-shadow: 0 0 25px gold;
-      animation: glow 3s infinite alternate;
+      animation: glow 1.5s infinite alternate, float 6s ease-in-out infinite;
       position: relative;
       overflow: hidden;
+      transform-style: preserve-3d;
+    }
+
+    .legendary::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(212, 175, 55, 0.1) 0%,
+        rgba(212, 175, 55, 0.3) 50%,
+        rgba(212, 175, 55, 0.1) 100%
+      );
+      z-index: 1;
+      pointer-events: none;
     }
 
     .legendary::after {
@@ -291,17 +344,17 @@
         to bottom right,
         rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 0) 40%,
-        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0.5) 50%,
         rgba(255, 255, 255, 0) 60%,
         rgba(255, 255, 255, 0) 100%
       );
       transform: rotate(30deg);
-      animation: shine 5s infinite;
-    }
+      animation: shine 3s infinite;
+      z-index: 2;
+}
 
     @keyframes shine {
       0% { transform: translateX(-100%) rotate(30deg); }
-      20% { transform: translateX(100%) rotate(30deg); }
       100% { transform: translateX(100%) rotate(30deg); }
     }
 
@@ -438,6 +491,13 @@
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 15px;
       }
+
+      .rare::before {
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+      }
     }
   </style>
 </head>
@@ -478,6 +538,9 @@
       <div class="card-slot common">
         <img src="Thomas_C.PNG" alt="Tomaïe la Chope Sans Fond" onclick="openLightbox(this, 'Tomaïe la Chope Sans Fond', 'Tavernier dodu, bourré 90% du temps. On ne sait pas s&rsquo;il sert de la bière ou s&rsquo;il boit tous les stocks en cachette. Très chaleureux, surtout quand il titube.')">
       </div>
+      <div class="card-slot common">
+        <img src="Louna_C.png" alt="Louna la Majoresse" onclick="openLightbox(this, 'Louna la Majoresse', 'Déesse de la Prépa, elle règne sur les copies et les démonstrations. Aucun sujet ne lui résiste, aucun classement ne la voit tomber. Elle lit Euclide comme d&rsquo;autres lisent des contes, et distribue les baffes intellectuelles avec grâce.')">
+      </div>
     </div>
 
     <div class="section-title-container">
@@ -485,7 +548,7 @@
     </div>
     <div class="container">
       <div class="card-slot rare">
-        <img src="images/rares/rare1.jpg" alt="Léo le Stratège" onclick="openLightbox(this, 'Léo le Stratège', 'Conquérant des DM, toujours prêt pour un duel de calculs.')">
+        <img src="Manele_R.png" alt="Maneleh la Brumessière" onclick="openLightbox(this, 'Maneleh la Brumessière', 'Accro à sa pipe magique, Maneleh fait apparaître des nuages ensorcelés qui sentent la fraise lunaire. Elle attend chaque soir Louis la Sirène, son mari disparu dans les flots. Quand elle souffle un cœur de brume, il lui répond au loin. Elle est drôle, imprévisible… et légèrement toxique.')">
       </div>
     </div>
 
@@ -493,9 +556,9 @@
       <h2>Légendaire</h2>
     </div>
     <div class="container">
-      <div class="card-slot legendary">
-        <img src="Louis_L.PNG" alt="Louichka des Écumes" onclick="openLightbox(this, 'Louichka des Écumes', 'La poiscaille légendaire de la PT. Sirène à lunettes, à la beauté abyssale et à l&rsquo;intelligence tranchante. Très respecté, on l&rsquo;appelle simplement : le Poisson.')">
-      </div>
+      <div class="card-slot legendary" onclick="openLightbox(this.querySelector('img'), 'Louichka des Écumes', 'La poiscaille légendaire de la PT. Sirène à lunettes, à la beauté abyssale et à l&rsquo;intelligence tranchante. Très respecté, on l&rsquo;appelle simplement : le Poisson.')">
+        <img src="Louis_L.PNG" alt="Louichka des Écumes">
+      </div>      
     </div>
 
     <footer>
