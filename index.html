@@ -92,6 +92,11 @@
       100% { transform: scale(1); }
     }
 
+    .noscroll {
+      overflow: hidden;
+      height: 100vh;
+    }
+
     body {
       background: 
         radial-gradient(circle at center, rgba(58, 45, 33, 0.8) 0%, var(--dark-bg) 100%),
@@ -608,11 +613,15 @@
       document.getElementById('lightbox-name').textContent = name;
       document.getElementById('lightbox-desc').innerHTML = desc;
       document.querySelector('.lightbox').style.display = 'flex';
+      document.body.classList.add('noscroll'); // 👉 empêche le scroll
     }
+
 
     function closeLightbox() {
       document.querySelector('.lightbox').style.display = 'none';
+      document.body.classList.remove('noscroll'); // 👉 réactive le scroll
     }
+
 
     // Initialize everything
     document.addEventListener('DOMContentLoaded', function() {
