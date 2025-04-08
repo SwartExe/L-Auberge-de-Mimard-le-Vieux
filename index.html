@@ -15,7 +15,7 @@
       --bronze: #cd7f32;
       --blood: #8a0303;
       --dark-bg: #0a0806;
-      --mythic: #6a0dad;
+      --mythic: #9E0E40; /* Changé de #6a0dad à #9E0E40 */
       --submit: #2e8b57;
     }
 
@@ -316,7 +316,7 @@
     .legendary { 
       border: 6px solid var(--gold);
       background: url('https://www.transparenttextures.com/patterns/gold-scale.png'), #f7d46d;
-      box-shadow: 0 0 25px gold;
+      box-shadow: 0 0 25px rgb(255, 215, 0);
       animation: glow 1.5s infinite alternate, float 6s ease-in-out infinite;
       position: relative;
       overflow: hidden;
@@ -361,43 +361,38 @@
     }
 
     @keyframes shine {
-      0% { transform: translateX(-100%) rotate(30deg); }
-      100% { transform: translateX(100%) rotate(30deg); }
+      0% { transform: translateX(-110%) rotate(30deg); }
+      100% { transform: translateX(110%) rotate(30deg); }
     }
 
-
-    .mythic { 
+    .mythic {
       border: 8px solid var(--mythic);
-      background: 
-        radial-gradient(circle at center, rgba(106, 13, 173, 0.2) 0%, rgba(0, 0, 0, 0.7) 100%),
-        url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
-      box-shadow: 
-        0 0 30px var(--mythic),
-        0 0 60px rgba(106, 13, 173, 0.5);
+      background: none;
+      box-shadow: 0 0 20px rgba(158, 14, 64, 0.5);
       position: relative;
       overflow: hidden;
       transform-style: preserve-3d;
       z-index: 1;
-      animation: mythic-float 5s ease-in-out infinite, mythic-glow 3s infinite alternate;
+      animation: mythic-float 5s ease-in-out infinite;
     }
 
     @keyframes mythic-glow {
       0% {
         box-shadow: 
           0 0 30px var(--mythic),
-          0 0 60px rgba(107, 28, 35, 0.5);
+          0 0 60px rgba(158, 14, 64, 0.7);
         filter: brightness(1);
       }
       50% {
         box-shadow: 
           0 0 50px var(--mythic),
-          0 0 90px rgba(107, 28, 35, 0.8);
+          0 0 90px rgba(158, 14, 64, 0.9);
         filter: brightness(1.2);
       }
       100% {
         box-shadow: 
           0 0 40px var(--mythic),
-          0 0 70px rgba(107, 28, 35, 0.6);
+          0 0 70px rgba(158, 14, 64, 0.8);
         filter: brightness(1.1);
       }
     }
@@ -411,6 +406,23 @@
     .mythic::before {
       content: "";
       position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(158, 14, 64, 0.01) 0%,
+        rgba(158, 14, 64, 0.02) 50%,
+        rgba(158, 14, 64, 0.01) 100%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .mythic::after {
+      content: "";
+      position: absolute;
       top: -50%;
       left: -50%;
       width: 200%;
@@ -419,62 +431,13 @@
         to bottom right,
         rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 0) 40%,
-        rgba(200, 160, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0.5) 50%,
         rgba(255, 255, 255, 0) 60%,
         rgba(255, 255, 255, 0) 100%
       );
-      transform: rotate(45deg);
-      animation: mythic-shine 5s linear infinite;
-      z-index: 1;
-    }
-
-    @keyframes mythic-shine {
-      0% { transform: translateX(-100%) rotate(45deg); }
-      100% { transform: translateX(100%) rotate(45deg); }
-    }
-
-    .mythic::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(
-        circle at center,
-        rgba(255, 255, 255, 0.1) 0%,
-        rgba(107, 28, 35, 0.3) 50%,
-        rgba(0, 0, 0, 0.7) 100%
-      );
-      z-index: 0;
-    }
-
-    .mythic-particle {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background: rgba(107, 28, 35, 0.8);
-      border-radius: 50%;
-      pointer-events: none;
-      box-shadow: 
-        0 0 15px #fff,
-        0 0 10px var(--mythic);
-      animation: mythic-sparkle 4s infinite ease-in-out;
-    }
-
-    @keyframes mythic-sparkle {
-      0% { 
-        transform: scale(0.8) translateY(0); 
-        opacity: 0.5; 
-      }
-      50% { 
-        transform: scale(1.2) translateY(-5px); 
-        opacity: 1; 
-      }
-      100% { 
-        transform: scale(0.8) translateY(0); 
-        opacity: 0.5; 
-      }
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+      z-index: 2;
     }
 
     .submit-card {
@@ -507,23 +470,6 @@
     @keyframes glow-submit {
       0% { box-shadow: 0 0 15px var(--submit); }
       100% { box-shadow: 0 0 30px var(--submit); }
-    }
-
-    .mythic-particle {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background: rgba(200, 160, 255, 0.8);
-      border-radius: 50%;
-      pointer-events: none;
-      box-shadow: 0 0 15px #fff, 0 0 10px var(--mythic);
-      animation: mythic-sparkle 4s infinite ease-in-out;
-    }
-
-    @keyframes mythic-sparkle {
-      0% { transform: scale(0.8); opacity: 0.5; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(0.8); opacity: 0.5; }
     }
 
     .lightbox {
@@ -720,6 +666,9 @@
       <div class="card-slot common">
         <img src="Simeon_C.PNG" alt="Siméon, Mage de la Wifi" onclick="openLightbox(this, 'Siméon, Mage de la Wifi', 'Toujours équipé de sa cape bleue et de ses lunettes enchantées, Siméon est un mage moderne maîtrisant les arcanes du réseau sans fil. Il tire sa magie d’un ancien grimoire crypté, relié au flux mystique du Wifi. Solitaire par nature, il considère que la prépa est une quête individuelle. Il préfère les sorts silencieux aux discussions inutiles, et rien ne le perturbe lorsqu’il est connecté à l’Éther. On dit qu’il peut deviner un devoir maison avant même qu’il ne soit annoncé.')">
       </div>        
+      <div class="card-slot common">
+        <img src="Muharrem_C.PNG" alt="Muharrem le Détimé" onclick="openLightbox(this, 'Muharrem le Détimé', 'Elfe distrait et voyageur temporel involontaire. Toujours en retard, jamais vraiment là où il faut… mais toujours avec style. Il se réveille quand les autres ont déjà fini l&rsquo;épopée. Sa magie ? Ralentir le temps. Même sans le vouloir.')">
+      </div>       
     </div>
     
     <div class="section-title-container">
@@ -744,6 +693,9 @@
       <div class="card-slot rare">
         <img src="Julien_R.png" alt="Giulhan le Fourbe" onclick="openLightbox(this, 'Giulhan le Fourbe', 'Surnommé &quot;le Troublion de la Cour&quot;, Giulhan est connu pour ses plaisanteries douteuses et son habileté à détourner l\'attention des professeurs du royaume. Toujours planqué au fond de la salle, capuche sur la tête, il parle quand il ne faut pas, rit quand personne ne comprend, et se cache quand il faut répondre. Pourtant, certains disent qu\'il possède une ruse insoupçonnée… ou juste une chance insolente.')">
       </div> 
+      <div class="card-slot rare" onclick="openLightbox(this.querySelector('img'), 'Brunogar le Nain-Espion', 'Massif comme un troll, mais avec l&rsquo;ouïe d&rsquo;un furet. Bruno entend tout, même les pensées. Il soulève des haltères entre deux complots, et personne n&rsquo;ose le critiquer… sauf à voix très basse.')">
+        <img src="Bruno_R.PNG" alt="Brunogar le Nain-Espion">
+      </div>      
     </div>    
 
     <div class="section-title-container">
@@ -761,6 +713,9 @@
     <div class="container">
       <div class="card-slot mythic" onclick="openLightbox(this.querySelector('img'), 'Agnessius le Vert', 'Liche mathémagicien survitaminé, fervent supporter de l&rsquo;ASSE. Il débite les théorèmes à la vitesse d&rsquo;un contre éclair. Ses cours sont des sprints, ses craies des flèches, et sa passion pour Sainté... immortelle.')">
         <img src="Agnes_M.PNG" alt="Agnessius le Vert">
+      </div>
+      <div class="card-slot mythic" onclick="openLightbox(this.querySelector('img'), 'Brunorius le Barde-Bourdon', 'Troubadour ventripotent de la Cour des Rires. Chemise tendue, ventre en avant, humour bien gras. Il fait rimer les proverbes comme les plats du jour. Quand il chante, même les dragons tapent des mains.')">
+        <img src="Guerreri_M.PNG" alt="Brunorius le Barde-Bourdon">
       </div>
     </div>
 
